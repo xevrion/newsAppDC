@@ -1,4 +1,3 @@
-import { Category } from '../types/news';
 import Constants from 'expo-constants';
 
 // Get your free API key from https://newsapi.org/
@@ -6,7 +5,7 @@ import Constants from 'expo-constants';
 export const NEWS_API_KEY = Constants.expoConfig?.extra?.newsApiKey || '';
 export const NEWS_API_BASE_URL = 'https://newsapi.org/v2';
 
-export const CATEGORIES: { id: Category; label: string; icon: string }[] = [
+export const CATEGORIES = [
   { id: 'business', label: 'Business', icon: '💼' },
   { id: 'sports', label: 'Sports', icon: '⚽' },
   { id: 'technology', label: 'Technology', icon: '💻' },

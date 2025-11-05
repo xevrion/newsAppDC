@@ -1,35 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, RefreshControl, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
-import { Article } from '../types/news';
 import { newsApi } from '../services/newsApi';
 import { ArticleCard } from '../components/ArticleCard';
 import { ArticleCardSkeleton } from '../components/SkeletonLoader';
 import { useTheme } from '../contexts/ThemeContext';
 import { SPACING, FONT_SIZE } from '../constants/theme';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
-export const HomeScreen: React.FC = () => {
-  const navigation = useNavigation<NavigationProp>();
-  const { theme, isDark, toggleTheme } = useTheme();
-  const [articles, setArticles] = useState<Article[]>([]);
+export const CategoryScreen = ({ category, title, icon }) => {
+  const navigation = useNavigation();
+  const { theme } = useTheme();
+  const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     fetchArticles();
-  }, []);
+  }, [category]);
 
   const fetchArticles = async () => {
     try {
       setLoading(true);
-      const data = await newsApi.getTopTrendingHeadlines();
+      const data = await newsApi.getTopHeadlinesByCategory(category);
       setArticles(data);
     } catch (error) {
-      console.error('Error fetching trending headlines:', error);
+      console.error(`Error fetching ${category} headlines:`, error);
     } finally {
       setLoading(false);
     }
@@ -41,24 +36,14 @@ export const HomeScreen: React.FC = () => {
     setRefreshing(false);
   };
 
-  const handleArticlePress = (article: Article) => {
+  const handleArticlePress = (article) => {
     navigation.navigate('Article', { article });
   };
 
   const renderHeader = () => (
     <View style={styles.header}>
-      <View>
-        <Text style={[styles.headerTitle, { color: theme.text }]}>Top Trending</Text>
-        <Text style={[styles.headerSubtitle, { color: theme.textSecondary }]}>
-          Today's top 5 headlines
-        </Text>
-      </View>
-      <TouchableOpacity
-        style={[styles.themeToggle, { backgroundColor: theme.surface }]}
-        onPress={toggleTheme}
-      >
-        <Text style={styles.themeIcon}>{isDark ? '☀️' : '🌙'}</Text>
-      </TouchableOpacity>
+      <Text style={styles.headerIcon}>{icon}</Text>
+      <Text style={[styles.headerTitle, { color: theme.text }]}>{title}</Text>
     </View>
   );
 
@@ -84,7 +69,6 @@ export const HomeScreen: React.FC = () => {
           <ArticleCard
             article={item}
             onPress={() => handleArticlePress(item)}
-            showCategory={true}
           />
         )}
         ListHeaderComponent={renderHeader}
@@ -95,6 +79,13 @@ export const HomeScreen: React.FC = () => {
             tintColor={theme.primary}
             colors={[theme.primary]}
           />
+        }
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={[styles.emptyText, { color: theme.textSecondary }]}>
+              No articles available
+            </Text>
+          </View>
         }
       />
     </View>
@@ -107,27 +98,23 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     padding: SPACING.lg,
     paddingTop: SPACING.xl,
+  },
+  headerIcon: {
+    fontSize: FONT_SIZE.xxl,
+    marginRight: SPACING.md,
   },
   headerTitle: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: '700',
   },
-  headerSubtitle: {
-    fontSize: FONT_SIZE.md,
-    marginTop: SPACING.xs,
-  },
-  themeToggle: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
+  emptyContainer: {
+    padding: SPACING.xl,
     alignItems: 'center',
   },
-  themeIcon: {
-    fontSize: 24,
+  emptyText: {
+    fontSize: FONT_SIZE.md,
   },
 });

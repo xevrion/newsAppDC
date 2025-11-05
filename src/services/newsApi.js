@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Article, Category, NewsApiResponse } from '../types/news';
 import { NEWS_API_KEY, NEWS_API_BASE_URL, DEFAULT_COUNTRY, PAGE_SIZE, DEFAULT_LANGUAGE } from '../constants/news';
 
 const api = axios.create({
@@ -13,9 +12,9 @@ export const newsApi = {
   /**
    * Fetch top headlines for a specific category
    */
-  getTopHeadlinesByCategory: async (category: Category, page: number = 1): Promise<Article[]> => {
+  getTopHeadlinesByCategory: async (category, page = 1) => {
     try {
-      const response = await api.get<NewsApiResponse>('/top-headlines', {
+      const response = await api.get('/top-headlines', {
         params: {
           category,
           country: DEFAULT_COUNTRY,
@@ -37,9 +36,9 @@ export const newsApi = {
   /**
    * Fetch top 5 trending headlines across all categories
    */
-  getTopTrendingHeadlines: async (): Promise<Article[]> => {
+  getTopTrendingHeadlines: async () => {
     try {
-      const response = await api.get<NewsApiResponse>('/top-headlines', {
+      const response = await api.get('/top-headlines', {
         params: {
           country: DEFAULT_COUNTRY,
           pageSize: 5,
@@ -49,7 +48,7 @@ export const newsApi = {
 
       return response.data.articles.map(article => ({
         ...article,
-        category: 'general' as Category,
+        category: 'general',
       }));
     } catch (error) {
       console.error('Error fetching trending headlines:', error);
@@ -60,9 +59,9 @@ export const newsApi = {
   /**
    * Search articles by keyword
    */
-  searchArticles: async (query: string, page: number = 1): Promise<Article[]> => {
+  searchArticles: async (query, page = 1) => {
     try {
-      const response = await api.get<NewsApiResponse>('/everything', {
+      const response = await api.get('/everything', {
         params: {
           q: query,
           pageSize: PAGE_SIZE,

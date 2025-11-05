@@ -1,21 +1,16 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
-import { Article } from '../types/news';
 import { newsApi } from '../services/newsApi';
 import { ArticleCard } from '../components/ArticleCard';
 import { useTheme } from '../contexts/ThemeContext';
 import { SPACING, BORDER_RADIUS, FONT_SIZE } from '../constants/theme';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
-export const SearchScreen: React.FC = () => {
-  const navigation = useNavigation<NavigationProp>();
+export const SearchScreen = () => {
+  const navigation = useNavigation();
   const { theme } = useTheme();
   const [query, setQuery] = useState('');
-  const [articles, setArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
@@ -34,7 +29,7 @@ export const SearchScreen: React.FC = () => {
     }
   }, [query]);
 
-  const handleArticlePress = useCallback((article: Article) => {
+  const handleArticlePress = useCallback((article) => {
     navigation.navigate('Article', { article });
   }, [navigation]);
 
@@ -107,7 +102,7 @@ export const SearchScreen: React.FC = () => {
     );
   }, [loading, hasSearched, articles.length, theme]);
 
-  const renderItem = useCallback(({ item }: { item: Article }) => (
+  const renderItem = useCallback(({ item }) => (
     <ArticleCard
       article={item}
       onPress={() => handleArticlePress(item)}
@@ -115,7 +110,7 @@ export const SearchScreen: React.FC = () => {
     />
   ), [handleArticlePress]);
 
-  const keyExtractor = useCallback((item: Article, index: number) => `${item.url}-${index}`, []);
+  const keyExtractor = useCallback((item, index) => `${item.url}-${index}`, []);
 
   return (
     <KeyboardAvoidingView

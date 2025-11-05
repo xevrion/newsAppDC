@@ -1,16 +1,12 @@
 import React from 'react';
 import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity, Linking } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
 import { useTheme } from '../contexts/ThemeContext';
 import { formatFullDate } from '../utils/dateUtils';
 import { SPACING, BORDER_RADIUS, FONT_SIZE } from '../constants/theme';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Article'>;
-
 const DEFAULT_IMAGE = 'https://via.placeholder.com/800x400?text=No+Image';
 
-export const ArticleScreen: React.FC<Props> = ({ route }) => {
+export const ArticleScreen = ({ route }) => {
   const { article } = route.params;
   const { theme } = useTheme();
 

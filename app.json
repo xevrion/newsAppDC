@@ -21,13 +21,17 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.xevrion.newsApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "newsApiKey": "f3873e8b39a04e7f809bc5079e50626d"
+      "newsApiKey": "f3873e8b39a04e7f809bc5079e50626d",
+      "eas": {
+        "projectId": "52035a42-7ee7-4b0d-aaeb-7e1bfd0045b1"
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-export const formatDate = (dateString: string): string => {
+export const formatDate = (dateString) => {
   const date = new Date(dateString);
   const now = new Date();
   const diffInMs = now.getTime() - date.getTime();
@@ -21,7 +21,7 @@ export const formatDate = (dateString: string): string => {
   }
 };
 
-export const formatFullDate = (dateString: string): string => {
+export const formatFullDate = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', {
     year: 'numeric',

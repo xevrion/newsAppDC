@@ -24,8 +24,6 @@ export const DARK_THEME = {
   shadow: '#000000',
 };
 
-export type Theme = typeof LIGHT_THEME;
-
 export const SPACING = {
   xs: 4,
   sm: 8,

@@ -3,14 +3,7 @@ import { View, StyleSheet, Animated } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import { SPACING, BORDER_RADIUS } from '../constants/theme';
 
-interface SkeletonLoaderProps {
-  width?: number | string;
-  height?: number | string;
-  borderRadius?: number;
-  style?: any;
-}
-
-export const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
+export const SkeletonLoader = ({
   width = '100%',
   height = 20,
   borderRadius = BORDER_RADIUS.sm,
@@ -57,7 +50,7 @@ export const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
   );
 };
 
-export const ArticleCardSkeleton: React.FC = () => {
+export const ArticleCardSkeleton = () => {
   const { theme } = useTheme();
 
   return (

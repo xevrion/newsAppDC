@@ -1,20 +1,13 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { Article } from '../types/news';
 import { useTheme } from '../contexts/ThemeContext';
 import { formatDate } from '../utils/dateUtils';
 import { SPACING, BORDER_RADIUS, FONT_SIZE } from '../constants/theme';
 import { CATEGORIES } from '../constants/news';
 
-interface ArticleCardProps {
-  article: Article;
-  onPress: () => void;
-  showCategory?: boolean;
-}
-
 const DEFAULT_IMAGE = 'https://via.placeholder.com/400x300?text=No+Image';
 
-export const ArticleCard: React.FC<ArticleCardProps> = ({ article, onPress, showCategory = false }) => {
+export const ArticleCard = ({ article, onPress, showCategory = false }) => {
   const { theme } = useTheme();
 
   const getCategoryInfo = () => {

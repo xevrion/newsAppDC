@@ -3,7 +3,6 @@ import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { RootStackParamList, MainTabsParamList } from '../types/navigation';
 import { useTheme } from '../contexts/ThemeContext';
 
 // Screens
@@ -16,8 +15,8 @@ import { ScienceScreen } from '../screens/ScienceScreen';
 import { SearchScreen } from '../screens/SearchScreen';
 import { ArticleScreen } from '../screens/ArticleScreen';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator<MainTabsParamList>();
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const MainTabs = () => {
   const { theme } = useTheme();
@@ -102,7 +101,7 @@ const MainTabs = () => {
   );
 };
 
-const TabIcon: React.FC<{ icon: string; color: string }> = ({ icon }) => {
+const TabIcon = ({ icon }) => {
   return <Text style={{ fontSize: 24 }}>{icon}</Text>;
 };
 
