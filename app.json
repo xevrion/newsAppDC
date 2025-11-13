@@ -30,8 +30,9 @@
     "extra": {
       "newsApiKey": "f3873e8b39a04e7f809bc5079e50626d",
       "eas": {
-        "projectId": "52035a42-7ee7-4b0d-aaeb-7e1bfd0045b1"
+        "projectId": "56ad7ad4-6b68-4aba-876e-471fe8a56853"
       }
-    }
+    },
+    "owner": "xevrion"
   }
 }
