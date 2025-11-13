@@ -1,4 +1,4 @@
-# News App - React Native Expo
+# VKS News - React Native Expo
 
 A modern, feature-rich news application built with React Native and Expo, featuring multiple news categories, dark mode, search functionality, and a clean UI.
 

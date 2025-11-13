@@ -1,31 +1,31 @@
 {
   "expo": {
-    "name": "newsApp",
-    "slug": "newsApp",
+    "name": "vks news",
+    "slug": "vks-news",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/vks-logo.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/vks-logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/vks-logo.png",
+        "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.xevrion.newsApp"
+      "package": "com.vks.news"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/vks-logo.png"
     },
     "extra": {
       "newsApiKey": "f3873e8b39a04e7f809bc5079e50626d",
